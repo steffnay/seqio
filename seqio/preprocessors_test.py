@@ -329,6 +329,11 @@ class PreprocessorsTest(tf.test.TestCase):
     )
     assert_dataset(dataset, {'inputs': 'That is good.', 'targets': ''})
 
+    dataset = preprocessors.rekey(
+        og_dataset, {'inputs': 'text', 'this_is_new': 'new'}
+    )
+    assert_dataset(dataset, {'inputs': 'That is good.', 'this_is_new': None})
+
   def test_truncate_length_two(self):
     self.og_tokenized_dataset = tf.data.Dataset.from_tensors({
         'inputs': [1, 2, 3],
